@@ -1,5 +1,5 @@
 # Simple DevOps Project
-
+![Simple DevOps Project](./images/simple_devops_project.png)
 ## Overview
 
 This project aims to provide a hands-on experience in setting up a complete CI/CD pipeline for a Java application using
@@ -26,6 +26,8 @@ utilizing key tools.
 
 - **Container Management:**
 - Kubernetes
+
+![Simple DevOps Project](./images/tools_project.png)
 
 ## Environment Setup
 
@@ -96,6 +98,9 @@ Participants will go through the following stages:
 - Subsequently, deployment is extended to a Docker container.
 - Finally, deployment on a Kubernetes cluster is implemented.
 
+![Simple DevOps Project](./images/env_setup.png)
+
+
 ### Project Progression:
 
 9. **Commit, Build, and Deploy Iteration:**
@@ -110,3 +115,7 @@ Participants will go through the following stages:
 11. **Final CI/CD Setup:**
 - By the end of the course, the complete CI/CD pipeline is established, allowing for automated integration, build,
   and deployment across various environments.
+
+## Documentation 
+
+Start checking out the [`walkthrough.md`](./documents/walkthrough.md). 
