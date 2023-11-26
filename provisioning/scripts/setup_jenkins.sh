@@ -87,10 +87,10 @@ echo $JENKINSPWD
 #P@ssword2#J&N1ks
 echo "Jenkins and Nginx installation completed. Access Jenkins at http://100.0.0.3:8080"
 
-"docker run --name jenkins --rm -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock --env JENKINS_ADMIN_ID=admin --env JENKINS_ADMIN_PASSWORD='P@ssword2#J&N1ks' --network minikube alexsimple/jenkins_jcasc:v5"
-"minikube start --base-image "gcr.io/k8s-minikube/kicbase:v0.0.32""
-"minikube start --base-image --memory 4096 "gcr.io/k8s-minikube/kicbase:v0.0.42""
-"docker pull gcr.io/k8s-minikube/kicbase:v0.0.42" - latest image
-"""$ kubectl cluster-info
-   Kubernetes control plane is running at https://192.168.49.2:8443
-"""
+# "docker run --name jenkins --rm -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock --env JENKINS_ADMIN_ID=admin --env JENKINS_ADMIN_PASSWORD='P@ssword2#J&N1ks' --network minikube alexsimple/jenkins_jcasc:v5"
+#"minikube start --base-image "gcr.io/k8s-minikube/kicbase:v0.0.32""
+#"minikube start --base-image --memory 4096 "gcr.io/k8s-minikube/kicbase:v0.0.42""
+#"docker pull gcr.io/k8s-minikube/kicbase:v0.0.42" - latest image
+#"""$ kubectl cluster-info
+#   Kubernetes control plane is running at https://192.168.49.2:8443
+#"""
