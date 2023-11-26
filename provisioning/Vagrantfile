@@ -1,0 +1,44 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  def common_provisioning(config)
+    config.vm.provision "shell", path: "scripts/provision_k8s.sh"
+  end
+
+  config.vm.define "jenkins" do |jenkins|
+    jenkins.vm.box_download_insecure = true
+    jenkins.vm.box = "bento/centos-7"
+    jenkins.vm.network "private_network", ip: "100.0.0.3"
+    jenkins.vm.hostname = "jenkins"
+    jenkins.vm.provider "virtualbox" do |v|
+      v.name = "jenkins"
+      v.memory = 2048
+      v.cpus = 2
+    end
+    jenkins.vm.provision "shell", path: "scripts/setup_jenkins.sh"
+  end
+
+  config.vm.define "minikube" do |minikube|
+    minikube.vm.box = "centos/8"
+    minikube.vm.provision "shell", inline: <<-SCRIPT
+      sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+      sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+      dnf install epel-release -y
+      sudo yum -y install go vim git wget unzip zip dnf net-tools >/dev/null 2>&1
+      dnf install podman -y
+      curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+      curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
+      sudo install -o root -g root -m 0755 kubectl /usr/local/bin/
+      install minikube-linux-amd64 /usr/local/bin/minikube
+      /usr/local/bin/minikube start --force --disable-driver-mounts
+      echo 'alias kubectl="minikube kubectl --"' >> /root/.bashrc
+    SCRIPT
+
+    minikube.vm.network "private_network", ip: "100.0.0.10"
+    minikube.vm.provider "virtualbox" do |vb|
+      vb.memory = "3024"
+      vb.cpus = "2"
+    end
+  end
+end
